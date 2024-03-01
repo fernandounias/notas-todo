@@ -1,0 +1,409 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+button{
+    cursor: pointer;
+}
+html {
+    font-size:16px;
+}
+body{
+    background-image: linear-gradient(120deg, #2c2a26, #222222);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+header{
+    font-size: 1.5rem;
+    min-height: 20vh;
+}
+header, .main, .todo-container, .todo-add{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.todo-add input, .todo-add button{
+    padding: 0.5rem;
+    font-size: 2.3rem;
+    border: none;
+    /* border: solid white 1px; */
+    /*dark mode*/
+    background-color: #4e4e4e;
+    /*bright mode*/
+    /* background-color: #fff; */
+    outline: none;
+}
+
+.todo-add input{
+    border-radius: 5px 0px 0px 5px;
+    /*dark mode*/
+    color:white;
+    /*bright mode*/
+    /* color: #4e4e4e; */
+}
+.todo-add button{
+    border-radius: 0px 5px 5px 0px;
+    /*bright mode*/
+    /* color: #4e4e4e; */
+    /* dark mode */
+    color: #fff;
+}
+
+.todo-add button{
+    transition: all 0.2s ease;
+}
+.todo-add button:hover {
+    /* background: white; */ /* style desition*/
+    color: rgb(46, 46, 46);
+}
+
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+}
+.todo-filter{
+    /*dark mode*/
+    background: #4e4e4e;
+    /*bright mode */
+    /* background: #fff; */
+    position: relative;
+    overflow: hidden;
+    width: 10rem;
+    /*dark mode*/
+    color: white;
+    /*bright mode*/
+    /* color: #4e4e4e; */
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 22px;
+    padding-left: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    height:100%
+}
+.todo-select {
+    margin-left: 15px;
+    background: #4e4e4e;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+}
+.todo-select::after{
+    content: '\25BC';
+    position: absolute;
+    /*dark mode*/
+    background: #fff;
+    /*bright mode*/
+    /* background: #4e4e4e; */
+    /*dark mode*/
+    color: #4e4e4e;
+    /*bright mode*/
+    /* color: #fff; */
+    top: 8px;
+    right: 4px;
+    padding: 10px;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    border-radius: 5px;
+}
+.todo-select:hover::after{
+    background: rgb(46, 46, 46);
+    color: #fff;
+    border-radius: 5px;
+}
+
+.todo-list{
+    /* min-width: 75%; */
+    list-style: none;
+    margin-top: 20px;
+    width: 480px;
+}
+
+.todo, .sub-todo{
+    margin: 0.5rem;
+    padding: 0.2rem;
+    background: #4e4e4e;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    border-radius: 5px;
+    /*-*/
+    position: relative;
+}
+
+.todo li, .sub-todo li{
+    flex: 1;
+    padding-left: 6px;
+}
+
+.trash-btn, .check-btn, .ok-btn, .cancel-btn, .sub-check-btn, .sub-trash-btn, .sub-ok-btn, .sub-cancel-btn{
+    background: rgb(46, 46, 46);
+    color: white;
+    border: none;
+    padding: 0.8rem;
+}
+.check-btn, .ok-btn, .sub-check-btn, .sub-ok-btn{
+    border-radius: 5px 0px 0px 5px;
+}
+.trash-btn, .cancel-btn, .sub-trash-btn, .sub-cancel-btn{
+    border-radius: 0px 5px 5px 0px;
+}
+.options-btn, .sub-todo-edit{
+    background: rgb(64, 64, 64);
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 5px;
+    margin-right: 3px;
+}
+.trash-btn:hover, .check-btn:hover, .options-btn:hover, .selected, .cancel-btn:hover, .ok-btn:hover, .sub-todo-edit:hover, .sub-check-btn:hover, .sub-trash-btn:hover, .sub-ok-btn:hover, .sub-cancel-btn:hover{
+    background: white;
+    color: rgb(46, 46, 46);
+    border: none;
+    padding: 0.8rem;
+}
+
+/* avoids the icon problem in btn */
+.fa-trash, .fa-check, .fa-x, .fa-solid, .fa-regular, button p{
+    pointer-events: none;
+}
+
+/*  */
+.completed{
+    text-decoration: line-through;
+    opacity: 0.4;
+}
+
+.cancel-btn{
+    width: 8.3%;
+}
+.ok-btn{
+    position: absolute;
+    right: 40px;
+}
+.edit-todo-input, .edit-subtodo-input{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: none;
+    background-color: #4e4e4e;
+    /*! background-color: #fff;*/
+    outline: none;
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    /*! border: white 1px solid;*/
+    /* width: 82%;*/
+    width: 76%;
+}
+.form-edit-todo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* delete animation */
+.fall{
+    /* transform: translateY(8rem) rotateZ(20deg); */
+    transform: translateX(6rem) translateY(1rem);
+    opacity: 0;
+}
+
+/* popover */
+.popover-container{
+    position: absolute;
+    right: 120px;
+    z-index: 12;
+}
+.popover{
+    position: relative;
+    width: 130px;
+    /* height: 74px; */
+    display: flex;
+    flex-direction: column;
+}
+.popover-btn-top{
+    background: rgb(64, 64, 64);
+    color: white;
+    border: none;
+    padding: 0.7rem;
+    border-radius: 5px 5px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.popover-btn-bottom{
+    background: rgb(64, 64, 64);
+    color: white;
+    border: none;
+    padding: 0.7rem;
+    border-radius: 0px 0px 5px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.popover-btn-top:hover, .popover-btn-bottom:hover{
+    background: rgb(220, 220, 220);
+    color: rgb(46, 46, 46);
+}
+.popover::after{
+    content: '';
+    position: absolute;
+    /* top: 27px; */
+    top: calc(50% - 8px);
+    right: -8px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid rgb(64, 64, 64);
+}
+
+.todo-complex{
+    display: flex;
+    flex-direction: column;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+}
+.todo-complex:first-child{
+    margin-top: 0;
+}
+
+.sub-todo{
+    margin: 0.3rem 0 0.3rem 36px;
+    font-size: 1.1rem;
+    width: 85%;
+}
+.sub-todo-edit, .sub-check-btn, .sub-trash-btn, .sub-ok-btn, .sub-cancel-btn{
+    padding: 0.7rem;
+}
+.sub-trash-btn{
+    margin-right: 1px;
+}
+.sub-todo-edit:hover, .sub-check-btn:hover, .sub-trash-btn:hover, .sub-ok-btn:hover, .sub-cancel-btn:hover{
+    padding: 0.7rem;
+}
+
+.sub-todo-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 2.3rem;
+    margin-bottom: 0.5rem;
+}
+.sub-todo-form input, .sub-todo-form button {
+    font-size: 1.4rem;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    background-color: #4e4e4e;
+    color: white;
+}
+.sub-todo-form input{
+    border-radius: 5px 0px 0px 5px;
+    flex-grow: 1;
+}
+.sub-todo-form button{
+    transition: all 0.2s ease;
+}
+.sub-todo-form button.close-input-subtask{
+    border-radius: 0px 5px 5px 0px;
+}
+.sub-todo-form button:hover {
+    color: rgb(46, 46, 46);
+}
+.list-subtodos{
+    margin-top: -0.3rem;
+}
+.edit-subtodo-input{
+    font-size: 1.1rem;
+}
+.todo-item{
+    max-height: 36px;
+    overflow: hidden;
+    margin-right: 6px;
+}
+.pop-up-btn-k{
+    background: rgb(64, 64, 64);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 2px 3px 2px 0px;
+    width: 45px;
+    padding: 0.8rem;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+    left: 0;    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* 3 dots that indicates text is not complete */
+.todo-item[data-size='large']::after {
+    content: '...';
+	position: absolute;
+	right: 116px;
+    padding: 0px 4px;
+	color: #959595;
+	bottom: 4px;
+    font-size: 42px;
+    line-height: 32px;
+    backdrop-filter: blur(1px);
+    height: 40px;
+    border-radius: 4px;
+}
+/* fix the height of the text in subtodo when is overflowing*/
+.sub-todo .todo-item[data-size='large'] {
+    padding-top: 5px;
+}
+.todo-item[data-size="large"]:hover::after {
+    color: #2d2d2d;
+}
+
+.pop-up-btn-close{
+    background: rgb(46, 46, 46);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.6rem;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 10px;
+}
+.pop-up-btn-close:hover{
+    background: white;
+    color: rgb(46, 46, 46);
+}
+.pop-up-todo{
+    margin: 0.5rem;
+    padding: 0.2rem;
+    background: #4e4e4e;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    border-radius: 5px;
+    position: relative;
+    width: 42%;
+    z-index: 200;
+}
+.pop-up-todo p{
+    font-size: 20px;
+    padding: 0.8rem;
+    width: 96%;
+}
+
